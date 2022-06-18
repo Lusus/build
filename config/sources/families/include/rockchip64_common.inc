@@ -10,8 +10,8 @@ OVERLAY_PREFIX='rockchip'
 SERIALCON=${SERIALCON:=$([ $BRANCH == "legacy" ] && echo "ttyFIQ0:1500000" || echo "ttyS2:1500000")}
 GOVERNOR="ondemand"
 ATFPATCHDIR='atf-rockchip64'
-BOOTBRANCH="tag:v2021.07"
-BOOTPATCHDIR="u-boot-rockchip64"
+BOOTBRANCH="tag:v2020.10"
+BOOTPATCHDIR="u-boot-rockchip64-mainline"
 PACKAGE_LIST_FAMILY="ethtool"
 
 RKBIN_DIR="$SRC/cache/sources/rkbin-tools"
@@ -45,6 +45,12 @@ if [[ $BOOT_SOC == rk3328 ]]; then
 	DDR_BLOB='rk33/rk3328_ddr_333MHz_v1.16.bin'
 	MINILOADER_BLOB='rk33/rk322xh_miniloader_v2.50.bin'
 	BL31_BLOB='rk33/rk322xh_bl31_v1.44.elf'
+
+elif [[ $BOARD == rockpro64 ]]; then
+
+	BOOT_SCENARIO="${BOOT_SCENARIO:=blobless}"
+	BOOT_SUPPORT_SPI=yes
+	BL31_BLOB='rk33/rk3399_bl31_v1.30.elf'
 
 elif [[ $BOOT_SOC == rk3399 ]]; then
 
